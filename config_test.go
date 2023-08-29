@@ -163,7 +163,6 @@ func TestDefaultConfig(t *testing.T) {
 	}
 	expectedConfig.Logging.Timestamps = true
 	expectedConfig.Auth.PasswordAuth.Enabled = true
-	expectedConfig.Auth.PasswordAuth.Accepted = true
 	expectedConfig.Auth.PublicKeyAuth.Enabled = true
 	expectedConfig.SSHProto.Version = "SSH-2.0-sshesame"
 	expectedConfig.SSHProto.Banner = "This is an SSH honeypot. Everything is logged and monitored."
@@ -188,7 +187,6 @@ auth:
   no_auth: true
   password_auth:
     enabled: false
-    accepted: false
   public_key_auth:
     enabled: false
     accepted: true
@@ -276,7 +274,6 @@ server:
 	}
 	expectedConfig.Logging.Timestamps = true
 	expectedConfig.Auth.PasswordAuth.Enabled = true
-	expectedConfig.Auth.PasswordAuth.Accepted = true
 	expectedConfig.Auth.PublicKeyAuth.Enabled = true
 	expectedConfig.SSHProto.Version = "SSH-2.0-sshesame"
 	expectedConfig.SSHProto.Banner = "This is an SSH honeypot. Everything is logged and monitored."

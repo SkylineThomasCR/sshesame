@@ -51,10 +51,15 @@ type keyboardInteractiveAuthConfig struct {
 	Questions        []keyboardInteractiveAuthQuestion `yaml:"questions"`
 }
 
+type passwordAuthConfig struct {
+	Enabled  bool   `yaml:"enabled"`
+	Password string `yaml:"password"`
+}
+
 type authConfig struct {
 	MaxTries                int                           `yaml:"max_tries"`
 	NoAuth                  bool                          `yaml:"no_auth"`
-	PasswordAuth            commonAuthConfig              `yaml:"password_auth"`
+	PasswordAuth            passwordAuthConfig            `yaml:"password_auth"`
 	PublicKeyAuth           commonAuthConfig              `yaml:"public_key_auth"`
 	KeyboardInteractiveAuth keyboardInteractiveAuthConfig `yaml:"keyboard_interactive_auth"`
 }
@@ -83,7 +88,6 @@ func (cfg *config) setDefaults() {
 	cfg.Server.ListenAddress = "127.0.0.1:2022"
 	cfg.Logging.Timestamps = true
 	cfg.Auth.PasswordAuth.Enabled = true
-	cfg.Auth.PasswordAuth.Accepted = true
 	cfg.Auth.PublicKeyAuth.Enabled = true
 	cfg.SSHProto.Version = "SSH-2.0-sshesame"
 	cfg.SSHProto.Banner = "This is an SSH honeypot. Everything is logged and monitored."

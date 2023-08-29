@@ -86,7 +86,7 @@ func TestPasswordDisabled(t *testing.T) {
 func TestPasswordFail(t *testing.T) {
 	cfg := &config{}
 	cfg.Auth.PasswordAuth.Enabled = true
-	cfg.Auth.PasswordAuth.Accepted = false
+	cfg.Auth.PasswordAuth.Password = "secret"
 	callback := cfg.getPasswordCallback()
 	if callback == nil {
 		t.Fatalf("callback=nil, want a function")
@@ -110,7 +110,7 @@ func TestPasswordFail(t *testing.T) {
 func TestPasswordSuccess(t *testing.T) {
 	cfg := &config{}
 	cfg.Auth.PasswordAuth.Enabled = true
-	cfg.Auth.PasswordAuth.Accepted = true
+	cfg.Auth.PasswordAuth.Password = "hunter2"
 	callback := cfg.getPasswordCallback()
 	if callback == nil {
 		t.Fatalf("callback=nil, want a function")
@@ -135,7 +135,7 @@ func TestPasswordFailJSON(t *testing.T) {
 	cfg := &config{}
 	cfg.Logging.JSON = true
 	cfg.Auth.PasswordAuth.Enabled = true
-	cfg.Auth.PasswordAuth.Accepted = false
+	cfg.Auth.PasswordAuth.Password = "secret"
 	callback := cfg.getPasswordCallback()
 	if callback == nil {
 		t.Fatalf("callback=nil, want a function")
@@ -160,7 +160,7 @@ func TestPasswordSuccessJSON(t *testing.T) {
 	cfg := &config{}
 	cfg.Logging.JSON = true
 	cfg.Auth.PasswordAuth.Enabled = true
-	cfg.Auth.PasswordAuth.Accepted = true
+	cfg.Auth.PasswordAuth.Password = "hunter2"
 	callback := cfg.getPasswordCallback()
 	if callback == nil {
 		t.Fatalf("callback=nil, want a function")

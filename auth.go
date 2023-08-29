@@ -38,14 +38,18 @@ func (cfg *config) getPasswordCallback() func(conn ssh.ConnMetadata, password []
 		return nil
 	}
 	return func(conn ssh.ConnMetadata, password []byte) (*ssh.Permissions, error) {
+		passwordConfigured := cfg.Auth.PasswordAuth.Password != ""
+		passwordMatches := cfg.Auth.PasswordAuth.Password == string(password)
+		accepted := !passwordConfigured || (passwordConfigured && passwordMatches)
+
 		connContext{ConnMetadata: conn, cfg: cfg}.logEvent(passwordAuthLog{
 			authLog: authLog{
 				User:     conn.User(),
-				Accepted: authAccepted(cfg.Auth.PasswordAuth.Accepted),
+				Accepted: authAccepted(accepted),
 			},
 			Password: string(password),
 		})
-		if !cfg.Auth.PasswordAuth.Accepted {
+		if !accepted {
 			return nil, errors.New("")
 		}
 		return nil, nil

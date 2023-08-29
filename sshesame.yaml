@@ -49,8 +49,9 @@ auth:
     # Offer password authentication as an authentication option.
     enabled: true
 
-    # Accept all passwords.
-    accepted: true
+    # Password that is accepted.
+    # If unspecified or null, all passwords are accepted.
+    password:
 
   public_key_auth:
     # Offer public key authentication as an authentication option.
